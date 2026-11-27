@@ -1,0 +1,50 @@
+# Python / Virtual Environments / Caches / OS / Secrets
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.matplotlib_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+catboost_info/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+.env
+.env.*
+kaggle.json
+
+# Large Raw/Interim Data & Prediction Archives (regenerable via scripts)
+data/raw/train.csv
+data/raw/test.csv
+data/raw/*.zip
+data/interim/_download_cache/
+data/interim/splits/*.csv
+experiments/results/*.npz
+
+# LaTeX Build Artifacts & Duplicate PDF
+reports/latex/*.aux
+reports/latex/*.bbl
+reports/latex/*.blg
+reports/latex/*.fdb_latexmk
+reports/latex/*.fls
+reports/latex/*.lof
+reports/latex/*.log
+reports/latex/*.lot
+reports/latex/*.out
+reports/latex/*.synctex.gz
+reports/latex/*.toc
+reports/latex/main.pdf
+
+# Reference Templates, Internal Project Docs, Raw Run JSONs & Duplicate Markdown Report (kept locally)
+reports/template report/
+reports/final_report.md
+docs/
+experiments/results/runs/

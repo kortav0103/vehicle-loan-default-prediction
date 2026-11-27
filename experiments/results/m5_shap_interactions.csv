@@ -1,0 +1,21 @@
+rank,feature_1,feature_2,mean_abs_interaction_shap
+1,disbursed_amount,ltv,0.015611
+2,branch_id__oof_te,supplier_id__oof_te,0.015001
+3,ltv,supplier_id__oof_te,0.013309
+4,supplier_id__oof_te,Current_pincode_ID__oof_te,0.01162
+5,ltv,Employment.Type_Self employed,0.011457
+6,ltv,branch_id__oof_te,0.010769
+7,NEW.ACCTS.IN.LAST.SIX.MONTHS,credit_utilization_ratio,0.01063
+8,ltv,bureau_score_clean,0.010208
+9,branch_id__oof_te,Current_pincode_ID__oof_te,0.009994
+10,bureau_score_clean,supplier_id__oof_te,0.009773
+11,ltv,Current_pincode_ID__oof_te,0.009635
+12,bureau_score_clean,inquiry_to_accts_ratio,0.009567
+13,Current_pincode_ID__oof_te,Current_pincode_ID__freq,0.009106
+14,disbursed_amount,Current_pincode_ID__oof_te,0.008901
+15,ltv,manufacturer_id_86,0.008852
+16,total_sanctioned_amount,bureau_score_clean,0.008502
+17,ltv_discrepancy,branch_id__oof_te,0.007912
+18,supplier_id__oof_te,supplier_id__freq,0.00783
+19,disbursed_amount,estimated_down_payment,0.007217
+20,ltv_x_no_bureau,supplier_id__oof_te,0.007065

@@ -1,0 +1,159 @@
+{
+  "dev_rows": 182501,
+  "dev_defaults": 37649,
+  "dev_non_defaults": 144852,
+  "dev_default_rate_pct": 20.6295,
+  "dev_date_min": "2018-08-01",
+  "dev_date_max": "2018-10-22",
+  "numerical_summary": {
+    "disbursed_amount": {
+      "median": 53303.0,
+      "p99": 95293.0,
+      "max": 990572.0,
+      "skewness": 3.63,
+      "pct_zero": 0.0
+    },
+    "asset_cost": {
+      "median": 70077.0,
+      "p99": 155650.0,
+      "max": 1628992.0,
+      "skewness": 5.74,
+      "pct_zero": 0.0
+    },
+    "ltv": {
+      "median": 76.89,
+      "p99": 89.96,
+      "max": 95.0,
+      "skewness": -1.06,
+      "pct_zero": 0.0
+    },
+    "age_at_disbursal": {
+      "median": 32.62,
+      "p99": 58.84,
+      "max": 64.45,
+      "skewness": 0.62,
+      "pct_zero": 0.0
+    },
+    "PRI.CURRENT.BALANCE": {
+      "median": 0.0,
+      "p99": 2984319.0,
+      "max": 66406160.0,
+      "skewness": 25.38,
+      "pct_zero": 60.49
+    },
+    "PRIMARY.INSTAL.AMT": {
+      "median": 0.0,
+      "p99": 267220.0,
+      "max": 25642806.0,
+      "skewness": 69.11,
+      "pct_zero": 67.97
+    }
+  },
+  "employment_summary": [
+    {
+      "Employment.Type_clean": "Salaried",
+      "n": 77532,
+      "k": 15003,
+      "rate": 19.35071970283238
+    },
+    {
+      "Employment.Type_clean": "MISSING",
+      "n": 5718,
+      "k": 1142,
+      "rate": 19.972018188177685
+    },
+    {
+      "Employment.Type_clean": "Self employed",
+      "n": 99251,
+      "k": 21504,
+      "rate": 21.666280440499342
+    }
+  ],
+  "ltv_decile_rates": [
+    {
+      "med": 52.43,
+      "n": 18260,
+      "rate": 13.105147864184008
+    },
+    {
+      "med": 63.18,
+      "n": 18260,
+      "rate": 15.104052573932092
+    },
+    {
+      "med": 68.92,
+      "n": 18252,
+      "rate": 18.008985316677624
+    },
+    {
+      "med": 72.96,
+      "n": 18241,
+      "rate": 19.193026698097693
+    },
+    {
+      "med": 74.99,
+      "n": 18292,
+      "rate": 20.50623223267002
+    },
+    {
+      "med": 78.49,
+      "n": 18222,
+      "rate": 20.875864339809024
+    },
+    {
+      "med": 80.23,
+      "n": 18247,
+      "rate": 22.89691456129775
+    },
+    {
+      "med": 83.83,
+      "n": 18332,
+      "rate": 24.98363517346716
+    },
+    {
+      "med": 85.68,
+      "n": 18145,
+      "rate": 25.80876274455773
+    },
+    {
+      "med": 89.42,
+      "n": 18250,
+      "rate": 25.830136986301373
+    }
+  ],
+  "interaction_heatmap_pct": {
+    "Q1 (Lowest LTV)": {
+      "1. No History (0)": 15.55,
+      "2. Other Unscored (<300)": 15.0,
+      "3. Scored Very Low Risk (A-D)": 10.35,
+      "4. Scored Low-Med Risk (E-H)": 14.31,
+      "5. Scored High-Very High Risk (I-M)": 20.49
+    },
+    "Q2": {
+      "1. No History (0)": 21.26,
+      "2. Other Unscored (<300)": 17.59,
+      "3. Scored Very Low Risk (A-D)": 13.67,
+      "4. Scored Low-Med Risk (E-H)": 17.52,
+      "5. Scored High-Very High Risk (I-M)": 25.72
+    },
+    "Q3": {
+      "1. No History (0)": 24.64,
+      "2. Other Unscored (<300)": 22.74,
+      "3. Scored Very Low Risk (A-D)": 15.67,
+      "4. Scored Low-Med Risk (E-H)": 18.86,
+      "5. Scored High-Very High Risk (I-M)": 27.71
+    },
+    "Q4 (Highest LTV)": {
+      "1. No History (0)": 29.29,
+      "2. Other Unscored (<300)": 25.54,
+      "3. Scored Very Low Risk (A-D)": 18.69,
+      "4. Scored Low-Med Risk (E-H)": 22.28,
+      "5. Scored High-Very High Risk (I-M)": 31.39
+    }
+  },
+  "key_correlations": {
+    "PRI.SANCTIONED_vs_PRI.DISBURSED": 0.9967,
+    "Aadhar_vs_VoterID": -0.8642,
+    "disbursed_vs_asset_cost": 0.6678
+  }
+}

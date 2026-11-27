@@ -1,0 +1,96 @@
+{
+  "random_seed": 42,
+  "total_rows": 233154,
+  "oot_split": {
+    "file": "data/interim/splits/oot_split.csv",
+    "sha256": "6bdc79111f6f0f461027a8382fb98aff268e200dc0949d627262ebfe20691c91",
+    "cutoff_date": "2018-10-23",
+    "rationale": "Date-clean chronological hold-out separating 2018-08-01..2018-10-22 (Dev) from 2018-10-23..2018-10-31 (Locked OOT Test), matching competition OOT Nov-2018 nature.",
+    "summary": {
+      "train": {
+        "n_rows": 146000,
+        "pct_of_total": 62.6196,
+        "n_defaults": 30119,
+        "default_rate_pct": 20.6295,
+        "min_date": "2018-08-01",
+        "max_date": "2018-10-22"
+      },
+      "val": {
+        "n_rows": 36501,
+        "pct_of_total": 15.6553,
+        "n_defaults": 7530,
+        "default_rate_pct": 20.6296,
+        "min_date": "2018-08-01",
+        "max_date": "2018-10-22"
+      },
+      "dev_all": {
+        "n_rows": 182501,
+        "pct_of_total": 78.2749,
+        "n_defaults": 37649,
+        "default_rate_pct": 20.6295,
+        "min_date": "2018-08-01",
+        "max_date": "2018-10-22"
+      },
+      "test_locked": {
+        "n_rows": 50653,
+        "pct_of_total": 21.7251,
+        "n_defaults": 12962,
+        "default_rate_pct": 25.5898,
+        "min_date": "2018-10-23",
+        "max_date": "2018-10-31"
+      }
+    },
+    "integrity_checks": {
+      "uid_overlap_train_val": 0,
+      "uid_overlap_train_test": 0,
+      "uid_overlap_val_test": 0,
+      "feature_row_overlap_dev_test": 0
+    }
+  },
+  "random_split": {
+    "file": "data/interim/splits/random_split.csv",
+    "sha256": "be64c0d34fbbde4308519425f8d013693d31b93b1dc2212bfcc3e7794c5b72c8",
+    "test_size": 0.2,
+    "rationale": "Comparative Stratified Random 80/20 hold-out split used strictly to quantify optimistic bias vs. OOT split (RQ3).",
+    "summary": {
+      "train": {
+        "n_rows": 149218,
+        "pct_of_total": 63.9998,
+        "n_defaults": 32391,
+        "default_rate_pct": 21.7072,
+        "min_date": "2018-08-01",
+        "max_date": "2018-10-31"
+      },
+      "val": {
+        "n_rows": 37305,
+        "pct_of_total": 16.0002,
+        "n_defaults": 8098,
+        "default_rate_pct": 21.7075,
+        "min_date": "2018-08-01",
+        "max_date": "2018-10-31"
+      },
+      "dev_all": {
+        "n_rows": 186523,
+        "pct_of_total": 79.9999,
+        "n_defaults": 40489,
+        "default_rate_pct": 21.7072,
+        "min_date": "2018-08-01",
+        "max_date": "2018-10-31"
+      },
+      "test_locked": {
+        "n_rows": 46631,
+        "pct_of_total": 20.0001,
+        "n_defaults": 10122,
+        "default_rate_pct": 21.7066,
+        "min_date": "2018-08-01",
+        "max_date": "2018-10-31"
+      }
+    },
+    "integrity_checks": {
+      "uid_overlap_train_val": 0,
+      "uid_overlap_train_test": 0,
+      "uid_overlap_val_test": 0,
+      "feature_row_overlap_dev_test": 0
+    }
+  }
+}

@@ -1,0 +1,58 @@
+project:
+  name: "ltfs-vehicle-loan-default"
+  title: "An Empirical Study of Machine Learning Models for Vehicle Loan Default Prediction"
+  random_seed: 42
+
+paths:
+  raw_train: "data/raw/train.csv"
+  raw_test: "data/raw/test.csv"
+  data_dictionary: "data/raw/data_dictionary.csv"
+  splits_dir: "data/interim/splits"
+  figures_dir: "experiments/figures"
+  tables_dir: "reports/tables"
+  audit_metadata: "reports/audit/dataset_metadata.json"
+
+schema:
+  id_column: "UniqueID"
+  target_column: "loan_default"
+  disbursal_date_column: "DisbursalDate"
+  dob_column: "Date.of.Birth"
+  avg_acct_age_column: "AVERAGE.ACCT.AGE"
+  credit_history_length_column: "CREDIT.HISTORY.LENGTH"
+  employment_type_column: "Employment.Type"
+  bureau_score_column: "PERFORM_CNS.SCORE"
+  bureau_desc_column: "PERFORM_CNS.SCORE.DESCRIPTION"
+  constant_drop_columns:
+    - "MobileNo_Avl_Flag"
+  potential_leakage_columns:
+    - "Employee_code_ID"
+  high_cardinality_safe_columns:
+    - "branch_id"
+    - "supplier_id"
+    - "Current_pincode_ID"
+  medium_cardinality_columns:
+    - "State_ID"
+    - "manufacturer_id"
+  low_cardinality_categoricals:
+    - "Employment.Type"
+    - "PERFORM_CNS.SCORE.DESCRIPTION"
+  kyc_flag_columns:
+    - "Aadhar_flag"
+    - "PAN_flag"
+    - "VoterID_flag"
+    - "Driving_flag"
+    - "Passport_flag"
+
+splits:
+  oot_cutoff_date: "2018-10-23"
+  val_size_within_dev: 0.20
+  random_test_size: 0.20
+  n_cv_folds: 5
+
+preprocessing:
+  winsor_quantiles: [0.005, 0.995]
+  target_encoding_smoothing: 50.0
+  target_encoding_cv_folds: 5
+  redundant_drop_columns_linear:
+    - "PRI.DISBURSED.AMOUNT"
+    - "SEC.DISBURSED.AMOUNT"

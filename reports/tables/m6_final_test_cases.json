@@ -1,0 +1,310 @@
+[
+  {
+    "case_type": "TP",
+    "oot_row_pos": 39921,
+    "actual_y": 1,
+    "pred_prob": 0.500036,
+    "base_prob": 0.186348,
+    "raw_attributes": {
+      "UniqueID": 630094.0,
+      "DisbursalDate": "27-10-18",
+      "disbursed_amount": 57154.0,
+      "asset_cost": 68112.0,
+      "ltv": 85.0,
+      "PERFORM_CNS.SCORE": 490.0,
+      "Employment.Type": "Self employed",
+      "PRI.NO.OF.ACCTS": 2.0,
+      "PRI.ACTIVE.ACCTS": 1.0,
+      "PRI.OVERDUE.ACCTS": 1.0,
+      "DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS": 1.0,
+      "NO.OF_INQUIRIES": 0.0,
+      "State_ID": 1.0,
+      "branch_id": 3.0,
+      "supplier_id": 14112.0,
+      "Current_pincode_ID": 30.0
+    },
+    "top_drivers": [
+      {
+        "feature": "delinquent_6m_to_total_ratio",
+        "feature_value": 0.5,
+        "shap_value": 0.268419
+      },
+      {
+        "feature": "ltv",
+        "feature_value": 85.0,
+        "shap_value": 0.231141
+      },
+      {
+        "feature": "bureau_score_clean",
+        "feature_value": 490.0,
+        "shap_value": 0.206606
+      },
+      {
+        "feature": "overdue_to_total_ratio",
+        "feature_value": 0.3333,
+        "shap_value": 0.180532
+      },
+      {
+        "feature": "credit_history_months",
+        "feature_value": 7.0,
+        "shap_value": 0.131795
+      },
+      {
+        "feature": "bureau_risk_ordinal",
+        "feature_value": 11.0,
+        "shap_value": 0.125638
+      },
+      {
+        "feature": "DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS",
+        "feature_value": 1.0,
+        "shap_value": 0.09055
+      },
+      {
+        "feature": "credit_utilization_ratio",
+        "feature_value": 0.7,
+        "shap_value": 0.082128
+      },
+      {
+        "feature": "ltv_discrepancy",
+        "feature_value": 1.0882,
+        "shap_value": -0.074136
+      },
+      {
+        "feature": "NEW.ACCTS.IN.LAST.SIX.MONTHS",
+        "feature_value": 1.0,
+        "shap_value": -0.068053
+      }
+    ]
+  },
+  {
+    "case_type": "TN",
+    "oot_row_pos": 31227,
+    "actual_y": 0,
+    "pred_prob": 0.074996,
+    "base_prob": 0.186348,
+    "raw_attributes": {
+      "UniqueID": 645014.0,
+      "DisbursalDate": "30-10-18",
+      "disbursed_amount": 42894.0,
+      "asset_cost": 63391.0,
+      "ltv": 68.62,
+      "PERFORM_CNS.SCORE": 680.0,
+      "Employment.Type": "Self employed",
+      "PRI.NO.OF.ACCTS": 4.0,
+      "PRI.ACTIVE.ACCTS": 2.0,
+      "PRI.OVERDUE.ACCTS": 0.0,
+      "DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS": 0.0,
+      "NO.OF_INQUIRIES": 0.0,
+      "State_ID": 5.0,
+      "branch_id": 20.0,
+      "supplier_id": 13931.0,
+      "Current_pincode_ID": 6238.0
+    },
+    "top_drivers": [
+      {
+        "feature": "ltv",
+        "feature_value": 68.62,
+        "shap_value": -0.149915
+      },
+      {
+        "feature": "ltv_discrepancy",
+        "feature_value": 0.9542,
+        "shap_value": -0.109096
+      },
+      {
+        "feature": "NEW.ACCTS.IN.LAST.SIX.MONTHS",
+        "feature_value": 1.0,
+        "shap_value": -0.106033
+      },
+      {
+        "feature": "age_at_disbursal",
+        "feature_value": 51.8275,
+        "shap_value": -0.10583
+      },
+      {
+        "feature": "disbursed_amount",
+        "feature_value": 42894.0,
+        "shap_value": -0.100717
+      },
+      {
+        "feature": "supplier_id__oof_te",
+        "feature_value": 0.1897,
+        "shap_value": -0.078479
+      },
+      {
+        "feature": "PRI.NO.OF.ACCTS",
+        "feature_value": 4.0,
+        "shap_value": -0.075934
+      },
+      {
+        "feature": "Employment.Type_Self employed",
+        "feature_value": 1.0,
+        "shap_value": 0.075009
+      },
+      {
+        "feature": "age_at_first_credit_years",
+        "feature_value": 50.9109,
+        "shap_value": -0.069206
+      },
+      {
+        "feature": "supplier_id__freq",
+        "feature_value": 0.0002,
+        "shap_value": 0.059596
+      }
+    ]
+  },
+  {
+    "case_type": "FN",
+    "oot_row_pos": 31251,
+    "actual_y": 1,
+    "pred_prob": 0.109978,
+    "base_prob": 0.186348,
+    "raw_attributes": {
+      "UniqueID": 621929.0,
+      "DisbursalDate": "25-10-18",
+      "disbursed_amount": 59259.0,
+      "asset_cost": 76500.0,
+      "ltv": 78.43,
+      "PERFORM_CNS.SCORE": 0.0,
+      "Employment.Type": "Self employed",
+      "PRI.NO.OF.ACCTS": 0.0,
+      "PRI.ACTIVE.ACCTS": 0.0,
+      "PRI.OVERDUE.ACCTS": 0.0,
+      "DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS": 0.0,
+      "NO.OF_INQUIRIES": 1.0,
+      "State_ID": 4.0,
+      "branch_id": 2.0,
+      "supplier_id": 22574.0,
+      "Current_pincode_ID": 1721.0
+    },
+    "top_drivers": [
+      {
+        "feature": "supplier_id__oof_te",
+        "feature_value": 0.1168,
+        "shap_value": -0.31943
+      },
+      {
+        "feature": "branch_id__freq",
+        "feature_value": 0.0583,
+        "shap_value": -0.157447
+      },
+      {
+        "feature": "ltv_discrepancy",
+        "feature_value": 0.9673,
+        "shap_value": -0.134987
+      },
+      {
+        "feature": "inquiry_to_accts_ratio",
+        "feature_value": 1.0,
+        "shap_value": 0.11429
+      },
+      {
+        "feature": "ltv",
+        "feature_value": 78.43,
+        "shap_value": -0.065947
+      },
+      {
+        "feature": "Current_pincode_ID__oof_te",
+        "feature_value": 0.1955,
+        "shap_value": -0.055601
+      },
+      {
+        "feature": "age_at_disbursal",
+        "feature_value": 34.1684,
+        "shap_value": -0.04824
+      },
+      {
+        "feature": "State_ID_4",
+        "feature_value": 1.0,
+        "shap_value": -0.048044
+      },
+      {
+        "feature": "down_payment_ratio",
+        "feature_value": 0.2254,
+        "shap_value": 0.047371
+      },
+      {
+        "feature": "disbursed_amount",
+        "feature_value": 59259.0,
+        "shap_value": 0.045213
+      }
+    ]
+  },
+  {
+    "case_type": "FP",
+    "oot_row_pos": 44844,
+    "actual_y": 0,
+    "pred_prob": 0.41976,
+    "base_prob": 0.186348,
+    "raw_attributes": {
+      "UniqueID": 652048.0,
+      "DisbursalDate": "31-10-18",
+      "disbursed_amount": 64882.0,
+      "asset_cost": 78763.0,
+      "ltv": 83.8,
+      "PERFORM_CNS.SCORE": 0.0,
+      "Employment.Type": "Self employed",
+      "PRI.NO.OF.ACCTS": 0.0,
+      "PRI.ACTIVE.ACCTS": 0.0,
+      "PRI.OVERDUE.ACCTS": 0.0,
+      "DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS": 0.0,
+      "NO.OF_INQUIRIES": 0.0,
+      "State_ID": 14.0,
+      "branch_id": 146.0,
+      "supplier_id": 21980.0,
+      "Current_pincode_ID": 2989.0
+    },
+    "top_drivers": [
+      {
+        "feature": "supplier_id__oof_te",
+        "feature_value": 0.2839,
+        "shap_value": 0.31059
+      },
+      {
+        "feature": "Current_pincode_ID__oof_te",
+        "feature_value": 0.3034,
+        "shap_value": 0.253365
+      },
+      {
+        "feature": "ltv",
+        "feature_value": 83.8,
+        "shap_value": 0.144949
+      },
+      {
+        "feature": "disbursed_amount",
+        "feature_value": 64882.0,
+        "shap_value": 0.104444
+      },
+      {
+        "feature": "overdue_to_total_ratio",
+        "feature_value": 0.5,
+        "shap_value": 0.102581
+      },
+      {
+        "feature": "avg_acct_age_months",
+        "feature_value": 74.0,
+        "shap_value": -0.091607
+      },
+      {
+        "feature": "ltv_x_no_bureau",
+        "feature_value": 83.8,
+        "shap_value": 0.077681
+      },
+      {
+        "feature": "credit_history_months",
+        "feature_value": 74.0,
+        "shap_value": -0.053547
+      },
+      {
+        "feature": "down_payment_ratio",
+        "feature_value": 0.1762,
+        "shap_value": 0.050575
+      },
+      {
+        "feature": "Employment.Type_Self employed",
+        "feature_value": 1.0,
+        "shap_value": 0.04724
+      }
+    ]
+  }
+]

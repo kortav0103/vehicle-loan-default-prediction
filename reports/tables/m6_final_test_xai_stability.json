@@ -1,0 +1,178 @@
+{
+  "n_oot_shap_samples": 10000,
+  "lgb_oot_treeshap_max_additivity_error": 1.4654943925052066e-14,
+  "dev_vs_oot_spearman_rho": 0.9731,
+  "dev_vs_oot_top15_jaccard": 0.875,
+  "domain_group_shares": [
+    {
+      "domain_group": "Operational Channel & Geography (Proxies)",
+      "dev_mean_abs_shap": 0.502811,
+      "oot_mean_abs_shap": 0.488838,
+      "dev_share_pct": 28.77,
+      "oot_share_pct": 28.9
+    },
+    {
+      "domain_group": "Loan Terms & LTV",
+      "dev_mean_abs_shap": 0.414793,
+      "oot_mean_abs_shap": 0.402708,
+      "dev_share_pct": 23.73,
+      "oot_share_pct": 23.81
+    },
+    {
+      "domain_group": "Existing Credit Accounts & Balances",
+      "dev_mean_abs_shap": 0.34658,
+      "oot_mean_abs_shap": 0.327991,
+      "dev_share_pct": 19.83,
+      "oot_share_pct": 19.39
+    },
+    {
+      "domain_group": "Borrower Demographics, Employment & KYC",
+      "dev_mean_abs_shap": 0.21737800000000002,
+      "oot_mean_abs_shap": 0.212696,
+      "dev_share_pct": 12.44,
+      "oot_share_pct": 12.58
+    },
+    {
+      "domain_group": "Delinquency & Credit Inquiries",
+      "dev_mean_abs_shap": 0.131753,
+      "oot_mean_abs_shap": 0.131214,
+      "dev_share_pct": 7.54,
+      "oot_share_pct": 7.76
+    },
+    {
+      "domain_group": "Credit Bureau Score & Unscored Regime",
+      "dev_mean_abs_shap": 0.134572,
+      "oot_mean_abs_shap": 0.127757,
+      "dev_share_pct": 7.7,
+      "oot_share_pct": 7.55
+    }
+  ],
+  "oot_entity_cold_start_rate_pct": {
+    "branch_id": 0.0,
+    "supplier_id": 0.796,
+    "Current_pincode_ID": 0.849,
+    "Employee_code_ID": 0.991
+  },
+  "top20_stability_features": [
+    {
+      "feature": "supplier_id__oof_te",
+      "domain_group": "Operational Channel & Geography (Proxies)",
+      "dev_mean_abs_shap": 0.144069,
+      "oot_mean_abs_shap": 0.170819
+    },
+    {
+      "feature": "ltv",
+      "domain_group": "Loan Terms & LTV",
+      "dev_mean_abs_shap": 0.146348,
+      "oot_mean_abs_shap": 0.127376
+    },
+    {
+      "feature": "Current_pincode_ID__oof_te",
+      "domain_group": "Operational Channel & Geography (Proxies)",
+      "dev_mean_abs_shap": 0.117085,
+      "oot_mean_abs_shap": 0.095143
+    },
+    {
+      "feature": "bureau_score_clean",
+      "domain_group": "Credit Bureau Score & Unscored Regime",
+      "dev_mean_abs_shap": 0.092591,
+      "oot_mean_abs_shap": 0.084625
+    },
+    {
+      "feature": "disbursed_amount",
+      "domain_group": "Loan Terms & LTV",
+      "dev_mean_abs_shap": 0.07252,
+      "oot_mean_abs_shap": 0.076922
+    },
+    {
+      "feature": "Employment.Type_Self employed",
+      "domain_group": "Borrower Demographics, Employment & KYC",
+      "dev_mean_abs_shap": 0.0718,
+      "oot_mean_abs_shap": 0.072908
+    },
+    {
+      "feature": "branch_id__oof_te",
+      "domain_group": "Operational Channel & Geography (Proxies)",
+      "dev_mean_abs_shap": 0.067354,
+      "oot_mean_abs_shap": 0.060536
+    },
+    {
+      "feature": "age_at_disbursal",
+      "domain_group": "Borrower Demographics, Employment & KYC",
+      "dev_mean_abs_shap": 0.060837,
+      "oot_mean_abs_shap": 0.059299
+    },
+    {
+      "feature": "down_payment_ratio",
+      "domain_group": "Loan Terms & LTV",
+      "dev_mean_abs_shap": 0.038277,
+      "oot_mean_abs_shap": 0.04936
+    },
+    {
+      "feature": "manufacturer_id_86",
+      "domain_group": "Operational Channel & Geography (Proxies)",
+      "dev_mean_abs_shap": 0.047542,
+      "oot_mean_abs_shap": 0.045504
+    },
+    {
+      "feature": "total_sanctioned_amount",
+      "domain_group": "Existing Credit Accounts & Balances",
+      "dev_mean_abs_shap": 0.044713,
+      "oot_mean_abs_shap": 0.042116
+    },
+    {
+      "feature": "PRI.SANCTIONED.AMOUNT",
+      "domain_group": "Existing Credit Accounts & Balances",
+      "dev_mean_abs_shap": 0.034114,
+      "oot_mean_abs_shap": 0.039187
+    },
+    {
+      "feature": "ltv_computed",
+      "domain_group": "Loan Terms & LTV",
+      "dev_mean_abs_shap": 0.040324,
+      "oot_mean_abs_shap": 0.038577
+    },
+    {
+      "feature": "ltv_discrepancy",
+      "domain_group": "Loan Terms & LTV",
+      "dev_mean_abs_shap": 0.0276,
+      "oot_mean_abs_shap": 0.035429
+    },
+    {
+      "feature": "inquiry_to_accts_ratio",
+      "domain_group": "Delinquency & Credit Inquiries",
+      "dev_mean_abs_shap": 0.033892,
+      "oot_mean_abs_shap": 0.033816
+    },
+    {
+      "feature": "bureau_risk_ordinal",
+      "domain_group": "Credit Bureau Score & Unscored Regime",
+      "dev_mean_abs_shap": 0.032097,
+      "oot_mean_abs_shap": 0.032637
+    },
+    {
+      "feature": "ltv_x_no_bureau",
+      "domain_group": "Loan Terms & LTV",
+      "dev_mean_abs_shap": 0.032211,
+      "oot_mean_abs_shap": 0.03254
+    },
+    {
+      "feature": "credit_utilization_ratio",
+      "domain_group": "Existing Credit Accounts & Balances",
+      "dev_mean_abs_shap": 0.025157,
+      "oot_mean_abs_shap": 0.028773
+    },
+    {
+      "feature": "delinquent_6m_to_total_ratio",
+      "domain_group": "Delinquency & Credit Inquiries",
+      "dev_mean_abs_shap": 0.027495,
+      "oot_mean_abs_shap": 0.028615
+    },
+    {
+      "feature": "overdue_to_total_ratio",
+      "domain_group": "Delinquency & Credit Inquiries",
+      "dev_mean_abs_shap": 0.027353,
+      "oot_mean_abs_shap": 0.028222
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+column,feature_type,cardinality_train,missing_train_pct,univariate_auc_inv,univariate_iv,encoding_recommendation,scaling_recommendation,signal_and_redundancy_note
+UniqueID,Identifier,233154,0.0,0.523731,0.019872,Drop before modeling,Drop,Leakage/ID (Remove)
+disbursed_amount,Numerical (Continuous Monetary / Ratio),24565,0.0,0.565041,0.057412,None,log1p/signed-log + Winsorize + RobustScaler (Linear/NN),Informative (high skewness & extreme outliers)
+asset_cost,Numerical (Continuous Monetary / Ratio),46252,0.0,0.51205,0.002624,None,log1p/signed-log + Winsorize + RobustScaler (Linear/NN),Informative (high skewness & extreme outliers)
+ltv,Numerical (Continuous Monetary / Ratio),6579,0.0,0.569386,0.064296,None,log1p/signed-log + Winsorize + RobustScaler (Linear/NN),Informative (high skewness & extreme outliers)
+branch_id,Categorical High-Cardinality (82),82,0.0,0.522023,0.016571,OOF Smoothed Target Encoding + Train Frequency Encoding (CatBoost native),Scale encoded outputs (Linear/NN),Moderate-High signal but high overfitting/drift risk
+supplier_id,Categorical High-Cardinality (2953),2953,0.0,0.520137,0.007374,OOF Smoothed Target Encoding + Train Frequency Encoding (CatBoost native),Scale encoded outputs (Linear/NN),Moderate-High signal but high overfitting/drift risk
+manufacturer_id,Categorical Medium-Cardinality (11),11,0.0,0.518243,0.007596,One-Hot (State/Manufacturer) or OOF Target Encoding,None after OHE,Moderate
+Current_pincode_ID,Categorical High-Cardinality (6698),6698,0.0,0.521725,0.017133,OOF Smoothed Target Encoding + Train Frequency Encoding (CatBoost native),Scale encoded outputs (Linear/NN),Moderate-High signal but high overfitting/drift risk
+Date.of.Birth,Date String (dd-mm-yy),15433,0.0,0.525721,0.008085,Parse with century fix -> age_at_disbursal,Scale derived age (Linear/NN),Moderate after parsing
+Employment.Type,"Categorical (Low-cardinality, Missing)",2,3.2858,,0.004851,Explicit 'Missing' category + One-Hot,None after OHE,Informative (missingness itself is informative)
+DisbursalDate,Date String (dd-mm-yy),84,0.0,0.523662,0.019924,Temporal split key; optional day-of-week/day-of-month,Cyclical / None,Split key / Drift risk
+State_ID,Categorical Medium-Cardinality (22),22,0.0,0.533327,0.029446,One-Hot (State/Manufacturer) or OOF Target Encoding,None after OHE,Moderate
+Employee_code_ID,Categorical High-Cardinality (3270),3270,0.0,0.514413,0.00573,OOF Smoothed Target Encoding + Train Frequency Encoding (CatBoost native),Scale encoded outputs (Linear/NN),Moderate-High signal but high overfitting/drift risk
+MobileNo_Avl_Flag,Constant Binary Flag,1,0.0,0.5,0.0,Drop (zero variance),Drop,Zero variance (Remove)
+Aadhar_flag,Binary Indicator Flag,2,0.0,0.518479,0.0,Keep 0/1 (note near-constant Passport/Driving flags),None,Weak individually (except VoterID/Aadhar); combine into kyc_doc_count
+PAN_flag,Binary Indicator Flag,2,0.0,0.500656,0.0,Keep 0/1 (note near-constant Passport/Driving flags),None,Weak individually (except VoterID/Aadhar); combine into kyc_doc_count
+VoterID_flag,Binary Indicator Flag,2,0.0,0.518679,0.0,Keep 0/1 (note near-constant Passport/Driving flags),None,Weak individually (except VoterID/Aadhar); combine into kyc_doc_count
+Driving_flag,Binary Indicator Flag,2,0.0,0.501064,0.0,Keep 0/1 (note near-constant Passport/Driving flags),None,Weak individually (except VoterID/Aadhar); combine into kyc_doc_count
+Passport_flag,Binary Indicator Flag,2,0.0,0.500425,0.0,Keep 0/1 (note near-constant Passport/Driving flags),None,Weak individually (except VoterID/Aadhar); combine into kyc_doc_count
+PERFORM_CNS.SCORE,Mixed Numerical + Special Status Codes,573,0.0,0.538754,0.045958,Regime split: has_bureau_score + bureau_score_clean + status_code,StandardScaler on valid scores (Linear/NN),Strongest single predictor once regime-split
+PERFORM_CNS.SCORE.DESCRIPTION,Categorical / Semi-Ordinal (Bureau Grade),20,0.0,,0.057748,Group into risk tier A-M vs Unscored regimes + OHE/Ordinal,None / Standardize if ordinal,Strong (redundant with clean score; complementary on unscored codes)
+PRI.NO.OF.ACCTS,"Numerical (Discrete Count, Right-skewed)",108,0.0,0.528098,0.01212,None (treat zero-inflation carefully),log1p + Robust/StandardScaler (Linear/NN),Strong (especially overdue/delinquent/inquiries)
+PRI.ACTIVE.ACCTS,"Numerical (Discrete Count, Right-skewed)",40,0.0,0.521573,0.010458,None (treat zero-inflation carefully),log1p + Robust/StandardScaler (Linear/NN),Strong (especially overdue/delinquent/inquiries)
+PRI.OVERDUE.ACCTS,"Numerical (Discrete Count, Right-skewed)",22,0.0,0.519051,0.004496,None (treat zero-inflation carefully),log1p + Robust/StandardScaler (Linear/NN),Strong (especially overdue/delinquent/inquiries)
+PRI.CURRENT.BALANCE,Numerical (Continuous Monetary / Ratio),71341,0.0,0.520471,0.016137,None,log1p/signed-log + Winsorize + RobustScaler (Linear/NN),Informative (high skewness & extreme outliers)
+PRI.SANCTIONED.AMOUNT,Numerical (Continuous Monetary / Ratio),44390,0.0,0.524101,0.019046,None,log1p/signed-log + Winsorize + RobustScaler (Linear/NN),Informative (high skewness & extreme outliers)
+PRI.DISBURSED.AMOUNT,Numerical (Continuous Monetary / Ratio),47909,0.0,0.523276,0.018293,None,log1p/signed-log + Winsorize + RobustScaler (Linear/NN),Informative (high skewness & extreme outliers)
+SEC.NO.OF.ACCTS,"Numerical (Discrete Count, Right-skewed)",37,0.0,0.502041,0.0,None (treat zero-inflation carefully),log1p + Robust/StandardScaler (Linear/NN),Strong (especially overdue/delinquent/inquiries)
+SEC.ACTIVE.ACCTS,"Numerical (Discrete Count, Right-skewed)",23,0.0,0.501321,0.0,None (treat zero-inflation carefully),log1p + Robust/StandardScaler (Linear/NN),Strong (especially overdue/delinquent/inquiries)
+SEC.OVERDUE.ACCTS,"Numerical (Discrete Count, Right-skewed)",9,0.0,0.500255,0.0,None (treat zero-inflation carefully),log1p + Robust/StandardScaler (Linear/NN),Strong (especially overdue/delinquent/inquiries)
+SEC.CURRENT.BALANCE,Numerical (Continuous Monetary / Ratio),3246,0.0,0.501088,0.000403,None,log1p/signed-log + Winsorize + RobustScaler (Linear/NN),Informative (high skewness & extreme outliers)
+SEC.SANCTIONED.AMOUNT,Numerical (Continuous Monetary / Ratio),2223,0.0,0.501281,0.0,None,log1p/signed-log + Winsorize + RobustScaler (Linear/NN),Informative (high skewness & extreme outliers)
+SEC.DISBURSED.AMOUNT,Numerical (Continuous Monetary / Ratio),2553,0.0,0.501281,0.0,None,log1p/signed-log + Winsorize + RobustScaler (Linear/NN),Informative (high skewness & extreme outliers)
+PRIMARY.INSTAL.AMT,Numerical (Continuous Monetary / Ratio),28067,0.0,0.505796,0.002752,None,log1p/signed-log + Winsorize + RobustScaler (Linear/NN),Informative (high skewness & extreme outliers)
+SEC.INSTAL.AMT,Numerical (Continuous Monetary / Ratio),1918,0.0,0.500801,0.0,None,log1p/signed-log + Winsorize + RobustScaler (Linear/NN),Informative (high skewness & extreme outliers)
+NEW.ACCTS.IN.LAST.SIX.MONTHS,"Numerical (Discrete Count, Right-skewed)",26,0.0,0.516837,0.004071,None (treat zero-inflation carefully),log1p + Robust/StandardScaler (Linear/NN),Strong (especially overdue/delinquent/inquiries)
+DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS,"Numerical (Discrete Count, Right-skewed)",14,0.0,0.512387,0.0,None (treat zero-inflation carefully),log1p + Robust/StandardScaler (Linear/NN),Strong (especially overdue/delinquent/inquiries)
+AVERAGE.ACCT.AGE,Duration String (Xyrs Ymon),192,0.0,0.522874,0.006911,Parse to integer months,log1p + Robust/StandardScaler (Linear/NN),Informative
+CREDIT.HISTORY.LENGTH,Duration String (Xyrs Ymon),294,0.0,0.526352,0.011713,Parse to integer months,log1p + Robust/StandardScaler (Linear/NN),Informative
+NO.OF_INQUIRIES,"Numerical (Discrete Count, Right-skewed)",25,0.0,0.516775,0.00723,None (treat zero-inflation carefully),log1p + Robust/StandardScaler (Linear/NN),Strong (especially overdue/delinquent/inquiries)
+loan_default,Target (Binary),2,0.0,1.0,,None,None,Target

@@ -1,0 +1,85 @@
+{
+  "n_explain_samples": 10000,
+  "n_interaction_samples": 1000,
+  "explain_split": "oot_dev_unseen_cv_fold_4",
+  "lgb_treeshap_max_additivity_error": 1.7319479184152442e-14,
+  "xgb_treeshap_max_additivity_error": 6.67572021484375e-06,
+  "cross_method_agreement": {
+    "lgb_shap_vs_xgb_shap": {
+      "spearman_rho": 0.9736,
+      "top15_jaccard": 0.875
+    },
+    "lgb_shap_vs_perm_auc": {
+      "spearman_rho": 0.7767,
+      "top15_jaccard": 0.4286
+    },
+    "lgb_shap_vs_lgb_gain": {
+      "spearman_rho": 0.9716,
+      "top15_jaccard": 0.5
+    },
+    "lgb_shap_vs_lr_abs_beta_common120": {
+      "spearman_rho": 0.0667,
+      "top15_jaccard": 0.0714
+    },
+    "lgb_shap_vs_lr_abs_std_beta_common120": {
+      "spearman_rho": 0.5579,
+      "top15_jaccard": 0.2
+    }
+  },
+  "domain_group_shares": [
+    {
+      "domain_group": "Operational Channel & Geography (Proxies)",
+      "lgb_mean_abs_shap": 0.502811,
+      "xgb_mean_abs_shap": 0.5106850000000001,
+      "lgb_perm_importance": 0.030666,
+      "lgb_shap_share_pct": 28.77,
+      "xgb_shap_share_pct": 28.98
+    },
+    {
+      "domain_group": "Loan Terms & LTV",
+      "lgb_mean_abs_shap": 0.414793,
+      "xgb_mean_abs_shap": 0.412358,
+      "lgb_perm_importance": 0.024068,
+      "lgb_shap_share_pct": 23.73,
+      "xgb_shap_share_pct": 23.4
+    },
+    {
+      "domain_group": "Existing Credit Accounts & Balances",
+      "lgb_mean_abs_shap": 0.34658,
+      "xgb_mean_abs_shap": 0.3444,
+      "lgb_perm_importance": 0.010349,
+      "lgb_shap_share_pct": 19.83,
+      "xgb_shap_share_pct": 19.54
+    },
+    {
+      "domain_group": "Borrower Demographics, Employment & KYC",
+      "lgb_mean_abs_shap": 0.21737800000000002,
+      "xgb_mean_abs_shap": 0.215678,
+      "lgb_perm_importance": 0.008271,
+      "lgb_shap_share_pct": 12.44,
+      "xgb_shap_share_pct": 12.24
+    },
+    {
+      "domain_group": "Credit Bureau Score & Unscored Regime",
+      "lgb_mean_abs_shap": 0.134572,
+      "xgb_mean_abs_shap": 0.138431,
+      "lgb_perm_importance": 0.011883000000000001,
+      "lgb_shap_share_pct": 7.7,
+      "xgb_shap_share_pct": 7.85
+    },
+    {
+      "domain_group": "Delinquency & Credit Inquiries",
+      "lgb_mean_abs_shap": 0.131753,
+      "xgb_mean_abs_shap": 0.140915,
+      "lgb_perm_importance": 0.006517,
+      "lgb_shap_share_pct": 7.54,
+      "xgb_shap_share_pct": 8.0
+    }
+  ],
+  "cv_entity_cold_start_rate_pct": {
+    "branch_id": 0.0,
+    "supplier_id": 0.124,
+    "Current_pincode_ID": 0.639
+  },
+  "xgb_interaction_max_additivity_error": 5.9604644775390625e-06
+}

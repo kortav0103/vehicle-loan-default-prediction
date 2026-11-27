@@ -1,0 +1,21 @@
+{
+  "captured_at_utc": "2026-11-20T05:41:54.932486+00:00",
+  "random_seed": 42,
+  "python_version": "3.12.13 (main, Jun 23 2026, 15:23:43) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu_logical_count": 28,
+  "total_ram_gb": 16.87,
+  "packages": {
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "lightgbm": "4.7.0",
+    "imbalanced-learn": "0.14.2",
+    "optuna": "5.1.0",
+    "matplotlib": "3.11.2",
+    "seaborn": "0.13.2",
+    "pyyaml": "6.0.3"
+  }
+}

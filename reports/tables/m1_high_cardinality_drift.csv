@@ -1,0 +1,7 @@
+column,train_nunique,test_nunique,oot20_unseen_rows_pct,oot20_unseen_ids_pct,kaggle_test_unseen_rows_pct,kaggle_test_unseen_ids_pct
+branch_id,82,82,0.0,0.0,0.0,0.0
+supplier_id,2953,2863,0.7785,4.0304,0.6709,4.7503
+manufacturer_id,11,11,0.0021,10.0,0.0009,9.0909
+Current_pincode_ID,6698,6202,0.875,5.7537,0.662,6.4173
+State_ID,22,22,0.0,0.0,0.0,0.0
+Employee_code_ID,3270,3143,1.0765,3.4166,1.2563,4.0725

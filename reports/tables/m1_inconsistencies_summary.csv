@@ -1,0 +1,22 @@
+check_name,n_violations_train,pct_of_train,default_rate_pct_when_violated,description
+dob_naive_future_year_gt_2018,19866,8.5205,19.2087,Pandas default 2-digit year parsing shifts '00-'68 incorrectly into 20xx
+age_corrected_under_18,0,0.0,,Borrower age at disbursal < 18 years after century fix
+age_corrected_over_75,0,0.0,,Borrower age at disbursal > 75 years after century fix
+disbursed_gt_asset_cost,0,0.0,,Disbursed loan amount exceeds declared asset cost
+ltv_gt_100,0,0.0,,Declared LTV > 100%
+ltv_diff_gt_5pct_pts,8132,3.4878,21.5322,|declared ltv - 100*disbursed/asset_cost| > 5 percentage points (likely processing fees/downpayment or LTV calc basis)
+pri_active_gt_total,0,0.0,,PRI.ACTIVE.ACCTS exceeds PRI.NO.OF.ACCTS
+pri_overdue_gt_active,2607,1.1181,27.4645,PRI.OVERDUE.ACCTS exceeds PRI.ACTIVE.ACCTS (possible closed/written-off overdue accounts)
+pri_overdue_gt_total,0,0.0,,PRI.OVERDUE.ACCTS exceeds PRI.NO.OF.ACCTS
+pri_negative_current_balance,448,0.1921,14.5089,Negative PRI.CURRENT.BALANCE (overpayment / credit balance / accounting artifact)
+pri_disbursed_gt_sanctioned,4266,1.8297,16.0806,PRI.DISBURSED.AMOUNT > PRI.SANCTIONED.AMOUNT
+pri_balance_gt_sanctioned,7593,3.2566,24.246,PRI.CURRENT.BALANCE > PRI.SANCTIONED.AMOUNT (accrued interest/penalties or reporting mismatch)
+pri_zero_accts_nonzero_bal_or_emi,0,0.0,,PRI.NO.OF.ACCTS == 0 yet PRI balance or primary EMI != 0
+sec_active_gt_total,0,0.0,,SEC.ACTIVE.ACCTS exceeds SEC.NO.OF.ACCTS
+sec_overdue_gt_active,324,0.139,17.5926,SEC.OVERDUE.ACCTS exceeds SEC.ACTIVE.ACCTS
+sec_negative_current_balance,61,0.0262,11.4754,Negative SEC.CURRENT.BALANCE
+sec_zero_accts_nonzero_bal_or_emi,0,0.0,,SEC.NO.OF.ACCTS == 0 yet SEC balance or secondary EMI != 0
+avg_acct_age_gt_credit_history_len,0,0.0,,AVERAGE.ACCT.AGE exceeds CREDIT.HISTORY.LENGTH
+delinquent_6m_gt_total_accts,0,0.0,,DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS > total PRI+SEC accounts
+new_6m_gt_total_accts,0,0.0,,NEW.ACCTS.IN.LAST.SIX.MONTHS > total PRI+SEC accounts
+pri_disbursed_equals_current_loan,3,0.0013,66.6667,Check if bureau PRI.DISBURSED.AMOUNT ever equals current vehicle loan disbursed_amount

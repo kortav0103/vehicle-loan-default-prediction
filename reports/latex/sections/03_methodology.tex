@@ -1,0 +1,134 @@
+\section{Methodology and Algorithm Implementation}
+\label{sec:methodology}
+
+\subsection{Pipeline Overview and Data-Splitting Strategy}
+To guarantee reproducible, leakage-free comparisons, the entire workflow operates under a unified random seed ($\text{seed} = 42$) and strict partition isolation. All preprocessing statistics, target encodings, hyperparameter searches, calibration curves, and operating cutoffs are derived exclusively from the Development set and frozen prior to single-pass evaluation on the unseen Test set. Figure~\ref{fig:pipeline} illustrates the six-stage pipeline.
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=0.45cm and 0.55cm,
+    box/.style={
+      rectangle, rounded corners=3pt, draw=hcmutblue, fill=softbg,
+      thick, align=center, font=\footnotesize, minimum height=1.15cm, text width=3.9cm
+    },
+    arrow/.style={-{Stealth[length=2.3mm,width=1.6mm]}, thick, color=hcmutblue}
+  ]
+    \node[box] (s1) {\textbf{1. Audit \& Cleaning}\\Fix birth years, drop IDs \& zero-variance flags};
+    \node[box, right=of s1] (s2) {\textbf{2. Data Splitting}\\Out-of-Time split + Random 80/20 control};
+    \node[box, right=of s2] (s3) {\textbf{3. Feature Engineering}\\Nested tiers: \texttt{F0} $\subset$ \texttt{F1} $\subset$ \texttt{F2\_safe} $\subset$ \texttt{F2\_plus\_emp}};
+    \node[box, below=0.85cm of s3] (s4) {\textbf{4. Fold-Safe Prep}\\Branch scaling, One-Hot, OOF Target Encoding};
+    \node[box, left=of s4] (s5) {\textbf{5. Modeling \& Tuning}\\6 ML models; 5-Fold CV Optuna tuning};
+    \node[box, left=of s5] (s6) {\textbf{6. Eval \& Policy}\\OOT eval, cost thresholds \& TreeSHAP audit};
+
+    \draw[arrow] (s1) -- (s2);
+    \draw[arrow] (s2) -- (s3);
+    \draw[arrow] (s3) -- (s4);
+    \draw[arrow] (s4) -- (s5);
+    \draw[arrow] (s5) -- (s6);
+  \end{tikzpicture}%
+  }
+  \caption{End-to-end leakage-free machine learning pipeline built for vehicle loan FPD prediction.}
+  \label{fig:pipeline}
+\end{figure}
+
+Because real lending models score future applications based on past contracts, our primary evaluation uses a \textbf{Date-Clean Out-of-Time (OOT) Split} with a cutoff on \texttt{2018-10-23} (no calendar day is shared across Development and Test). Inside the Development partition ($N = 182{,}501$), 5-fold stratified cross-validation guides tuning and threshold selection. For direct comparison, we also build a \textbf{Stratified Random 80/20 Split} sampled uniformly across all dates to quantify how much random splitting overstates future performance. Table~\ref{tab:splits} summarizes both protocols.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Summary of the Primary Out-of-Time (OOT) and Comparative Stratified Random splits.}
+  \label{tab:splits}
+  \footnotesize
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabular}{@{}llrrrc@{}}
+    \toprule
+    \textbf{Protocol} & \textbf{Partition} & \textbf{Contracts ($N$)} & \textbf{Defaults} & \textbf{Default Rate} & \textbf{Date Range} \\
+    \midrule
+    Primary OOT & Development (5-Fold CV) & $182{,}501$ & $37{,}649$ & $20.63\%$ & \texttt{2018-08-01}--\texttt{2018-10-22} \\
+    (Main Study) & Locked OOT Test & $50{,}653$ & $12{,}962$ & $25.59\%$ & \texttt{2018-10-23}--\texttt{2018-10-31} \\
+    \midrule
+    Random 80/20 & Development (5-Fold CV) & $186{,}523$ & $40{,}489$ & $21.71\%$ & \texttt{2018-08-01}--\texttt{2018-10-31} \\
+    (Control) & Locked Random Test & $46{,}631$ & $10{,}122$ & $21.71\%$ & \texttt{2018-08-01}--\texttt{2018-10-31} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Preprocessing and Feature Engineering}
+All stateful preprocessing steps are wrapped inside \texttt{scikit-learn} pipelines fitted strictly on training folds during cross-validation, and on the full Development set prior to final OOT scoring. Because linear/neural models and tree ensembles treat feature scales differently, two tailored preprocessing branches are constructed:
+\begin{itemize}
+  \item \textbf{Linear and Neural Branch (LR, MLP):} Numerical ledger features are median-imputed (with missingness indicators), clipped at training $[0.5\%, 99.5\%]$ quantiles, compressed via $\operatorname{sign}(x)\ln(1+|x|)$ to stabilize heavy tails and negative balances, and standardized via \texttt{RobustScaler}/\texttt{StandardScaler}. Low-cardinality categoricals are one-hot encoded, and near-duplicate disbursed-amount fields ($\rho > 0.995$ with sanctioned amounts) are removed.
+  \item \textbf{Tree Branch (DecisionTree, RandomForest, XGBoost, LightGBM):} Numerical attributes preserve their natural scales with median imputation and one-hot encoding for low-cardinality categories, allowing trees to split cleanly on raw rupee and percentage thresholds.
+\end{itemize}
+
+To utilize high-cardinality dealer, branch, and postal identifiers (\texttt{branch\_id}, \texttt{supplier\_id}, and \texttt{Current\_pincode\_ID}) without memorizing rare categories or leaking target labels, we pair training-fold category frequencies with an \textbf{Out-of-Fold Empirical-Bayes Target Encoder}~\cite{miccibarreca2001} ($K=5$ inner folds, smoothing parameter $m=50$):
+\begin{equation}
+\label{eq:oof_te}
+  \hat{e}_{c}^{(k)} = \frac{\sum_{i \in \mathcal{D}_{-k} : x_i = c} y_i + m \cdot \bar{y}_{-k}}{n_{c,-k} + m},
+\end{equation}
+where $\bar{y}_{-k}$ is the out-of-fold default rate. During inference, categories unseen in training safely receive the global training prior $\bar{y}_{\text{train}}$ and frequency $0.0$.
+
+To measure the value of domain feature engineering systematically, four nested feature tiers are constructed in Table~\ref{tab:features}. Notice that \texttt{Employee\_code\_ID} is isolated into Tier \texttt{F2\_plus\_emp} solely as an ablation test against personnel turnover and cold-start risk, leaving \texttt{F2\_safe} as our governed production feature set.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Four-tier nested feature engineering hierarchy and processed matrix dimensions.}
+  \label{tab:features}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{@{}llL{3.0cm}Y@{}}
+    \toprule
+    \textbf{Tier} & \textbf{Linear / Tree Cols} & \textbf{Scope} & \textbf{Engineered Signals Added} \\
+    \midrule
+    \texttt{F0} & $82$ / $84$ & Clean baseline & Drops IDs/constants; preserves missing employment; parses 3 duration/age fields (\texttt{age\_at\_disbursal}, \texttt{avg\_acct\_age\_months}, \texttt{credit\_history\_months}). \\[3pt]
+    \texttt{F1} & $114$ / $117$ & $+29$ domain features & Separates bureau score $<300$ vs.\ $\ge 300$ (4 features); adds down-payment \& LTV discrepancy (4); sums primary + secondary credit totals \& KYC count (9); computes delinquency/utilization/inquiry ratios (7); adds ledger anomaly \& \texttt{ltv\_x\_no\_bureau} flags (5). \\[3pt]
+    \texttt{F2\_safe} & $120$ / $123$ & $+$ Channel/Geo IDs & Adds OOF Target Encoding (Eq.~\eqref{eq:oof_te}) + frequency encoding for \texttt{branch\_id}, \texttt{supplier\_id}, and \texttt{Current\_pincode\_ID}. \\[3pt]
+    \texttt{F2\_plus\_emp} & $122$ / $125$ & $+$ Officer ID & Adds \texttt{Employee\_code\_ID} ($3{,}270$ levels) to test cold-start sensitivity. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Model Families and Hyperparameter Tuning}
+Six models spanning classical linear, tree-based, gradient-boosted, and neural paradigms are benchmarked on \texttt{F2\_safe} using 5-fold stratified CV maximizing ROC-AUC:
+\begin{itemize}
+  \item \textbf{Classical Baselines:} $L_2$-regularized \texttt{LogisticRegression}, single \texttt{DecisionTree} ($\text{max\_depth}=8$), and \texttt{RandomForest} bagging ensemble.
+  \item \textbf{Gradient Boosted Decision Trees:} Histogram-based \texttt{XGBoost} (\texttt{hist}) and leaf-wise \texttt{LightGBM} trained on the $123$-feature tree matrix.
+  \item \textbf{Deep Learning Baseline:} A tabular \texttt{MLP} neural network with two hidden layers $(128, 64)$, ReLU activations, $L_2$ weight decay ($\alpha = 0.001$), batch size $512$, and early stopping on the scaled $120$-feature matrix.
+\end{itemize}
+
+Hyperparameter optimization ran in two stages on the Development set using Optuna's Tree-structured Parzen Estimator (TPE)~\cite{akiba2019}. Stage~1 screened classical and GBDT families (Grid Search over $C$ for Logistic Regression; Optuna TPE for Random Forest, XGBoost, and LightGBM), showing that \texttt{LogisticRegression} saturated at $C=0.1$ while \texttt{RandomForest} slightly regressed under tuning (so the baseline RF configuration was retained). Stage~2 then ran warm-started Optuna TPE searches (up to $2{,}000$ trees for \texttt{LightGBM} and \texttt{XGBoost}) with \textbf{ROC-AUC early stopping} inside each CV fold and fixed average iteration counts refitted once on the full Development set before testing. Table~\ref{tab:hyperparams} lists the frozen model settings.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Final frozen hyperparameters selected on Development 5-Fold CV (\texttt{F2\_safe}).}
+  \label{tab:hyperparams}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{@{}llY@{}}
+    \toprule
+    \textbf{Model} & \textbf{Tuning Method} & \textbf{Frozen Hyperparameters} \\
+    \midrule
+    \texttt{LightGBM} & Optuna TPE (25 trials) & \texttt{num\_leaves=32, max\_depth=7, min\_child\_samples=57, min\_split\_gain=0.0058, lr=0.0159, subsample=0.751, colsample\_bytree=0.583, reg\_alpha=5.873, reg\_lambda=0.151, n\_estimators=937} \\
+    \texttt{XGBoost} & Optuna TPE (15 trials) & \texttt{max\_depth=5, min\_child\_weight=22.35, lr=0.0227, subsample=0.753, colsample\_bytree=0.552, gamma=0.322, reg\_alpha=0.491, reg\_lambda=9.240, n\_estimators=971} \\
+    \texttt{RandomForest} & Baseline retained & \texttt{n\_estimators=150, max\_depth=14, min\_samples\_leaf=25, max\_features="sqrt"} \\
+    \texttt{LogisticRegression} & Grid Search (6 values) & \texttt{C=0.1, solver="lbfgs", max\_iter=1000} \\
+    \texttt{MLP} & Controlled baseline & \texttt{hidden\_layer\_sizes=(128, 64), activation="relu", alpha=0.001, batch\_size=512, early\_stopping=True} \\
+    \texttt{DecisionTree} & Controlled baseline & \texttt{max\_depth=8, min\_samples\_leaf=50} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+All experiments ran deterministically with $8$ CPU threads in Python~3.12.13 using \texttt{scikit-learn}~1.9.1, \texttt{lightgbm}~4.7.0, \texttt{xgboost}~3.4.1, and \texttt{optuna}~5.1.0.
+
+\subsection{Imbalance Handling, Thresholding, and Evaluation Metrics}
+We compare six fold-isolated training strategies on \texttt{LightGBM}: unweighted \texttt{natural} priors, moderate class weight (\texttt{2.0}), full balanced \texttt{class\_weight} ($\approx 3.85$), random undersampling (\texttt{RUS 0.5}), and synthetic oversampling (\texttt{SMOTE 0.5} and \texttt{1.0} applied only inside standardized training folds).
+
+Because the base default rate is around $21\%$--$26\%$, applying the standard $0.50$ classification cutoff misses nearly all defaults. Under asymmetric costs where missing a default ($c_{\text{FN}}$) is far costlier than flagging a good borrower ($c_{\text{FP}}$), decision theory yields the Bayes-optimal threshold (Equation~\ref{eq:bayes_thresh}):
+\begin{equation}
+\label{eq:bayes_thresh}
+  \tau_{\text{Bayes}} = \frac{c_{\text{FP}}}{c_{\text{FP}} + c_{\text{FN}}},
+\end{equation}
+giving $\tau = 0.250$ for a $3{:}1$ cost ratio and $\tau = 0.167$ for a $5{:}1$ ratio. To reflect real portfolio exposure, we also evaluate example-dependent normalized financial loss over loan principal $A_i$ assuming Loss Given Default $\mathrm{LGD} = 0.50$ and net interest margin $m_{\text{net}} = 0.10$, defined in Equation~\ref{eq:amt_loss}:
+\begin{equation}
+\label{eq:amt_loss}
+  C_{\text{amt}}(\mathbf{y}, \hat{\mathbf{y}}) = \frac{0.50\sum_{i \in \mathrm{FN}} A_i + 0.10\sum_{i \in \mathrm{FP}} A_i}{\sum_{i=1}^{N} A_i}.
+\end{equation}
+Alongside F1-optimal and Top-$K$ capacity thresholds frozen on Development CV, models are evaluated via \textbf{ROC-AUC}, \textbf{PR-AUC}~\cite{saito2015} (precision--recall area), \textbf{Kolmogorov--Smirnov (KS)} separation, \textbf{Brier score}, 10-bin \textbf{Expected Calibration Error (ECE)}, and exact \textbf{TreeSHAP} log-odds feature attributions~\cite{lundberg2020}.

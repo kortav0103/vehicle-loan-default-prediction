@@ -1,0 +1,507 @@
+{
+  "inventory": {
+    "train_file": "train.csv",
+    "train_rows": 233154,
+    "train_cols": 41,
+    "test_file": "test.csv",
+    "test_rows": 112392,
+    "test_cols": 40,
+    "dictionary_file": "data_dictionary.csv",
+    "dictionary_rows": 41,
+    "train_only_columns": [
+      "loan_default"
+    ],
+    "test_only_columns": [],
+    "binary_01_columns": [
+      "Aadhar_flag",
+      "PAN_flag",
+      "VoterID_flag",
+      "Driving_flag",
+      "Passport_flag",
+      "loan_default"
+    ],
+    "unique_id_column": "UniqueID",
+    "unique_id_train_nunique": 233154,
+    "unique_id_test_nunique": 112392,
+    "unique_id_train_test_overlap": 0
+  },
+  "target_verification": {
+    "target_column": "loan_default",
+    "unique_values": [
+      0,
+      1
+    ],
+    "missing_target_count": 0,
+    "class_0_count": 182543,
+    "class_1_count": 50611,
+    "default_rate_pct": 21.7071,
+    "imbalance_ratio_neg_to_pos": 3.6068,
+    "monthly_summary_train": [
+      {
+        "period": "2018-08",
+        "n_loans": 68002,
+        "n_defaults": 14666,
+        "default_rate": 0.2156701273491956,
+        "granularity": "month"
+      },
+      {
+        "period": "2018-09",
+        "n_loans": 66788,
+        "n_defaults": 12815,
+        "default_rate": 0.19187578606935377,
+        "granularity": "month"
+      },
+      {
+        "period": "2018-10",
+        "n_loans": 98364,
+        "n_defaults": 23130,
+        "default_rate": 0.23514700500182995,
+        "granularity": "month"
+      }
+    ],
+    "train_disbursal_min": "2018-08-01",
+    "train_disbursal_max": "2018-10-31",
+    "test_disbursal_min": "2018-11-03",
+    "test_disbursal_max": "2018-11-30",
+    "test_monthly_counts": {
+      "2018-11": 112392
+    },
+    "oot_80_20_cutoff_date": "2018-10-23",
+    "oot_dev_default_rate_pct": 20.6666,
+    "oot_test_default_rate_pct": 25.8691
+  },
+  "data_quality": {
+    "duplicate_rows_train_exact": 0,
+    "duplicate_rows_train_excl_uid": 0,
+    "duplicate_rows_train_excl_uid_and_target": 0,
+    "duplicate_rows_test_exact": 0,
+    "duplicate_rows_test_excl_uid": 1,
+    "constant_columns": [
+      "MobileNo_Avl_Flag"
+    ],
+    "near_constant_99pct_columns": [
+      {
+        "column": "Passport_flag",
+        "top_value_pct": 99.7873
+      },
+      {
+        "column": "SEC.OVERDUE.ACCTS",
+        "top_value_pct": 99.4266
+      },
+      {
+        "column": "SEC.INSTAL.AMT",
+        "top_value_pct": 99.0491
+      }
+    ],
+    "employment_type_audit": [
+      {
+        "employment_type": "MISSING",
+        "count": 7661,
+        "pct_of_train": 3.2858,
+        "n_defaults": 1644,
+        "default_rate_pct": 21.4593
+      },
+      {
+        "employment_type": "Salaried",
+        "count": 97858,
+        "pct_of_train": 41.9714,
+        "n_defaults": 19910,
+        "default_rate_pct": 20.3458
+      },
+      {
+        "employment_type": "Self employed",
+        "count": 127635,
+        "pct_of_train": 54.7428,
+        "n_defaults": 29057,
+        "default_rate_pct": 22.7657
+      }
+    ],
+    "employment_type_chi2_p": 3.122542234328496e-42,
+    "dob_naive_future_years_train": 19866,
+    "dob_naive_future_years_test": 9839,
+    "age_corrected_train_summary": {
+      "min": 18.0,
+      "p01": 19.82,
+      "median": 32.67,
+      "p99": 58.83,
+      "max": 69.13
+    },
+    "age_corrected_test_summary": {
+      "min": 18.0,
+      "median": 33.16,
+      "max": 64.76
+    },
+    "duration_malformed_counts": {
+      "train_avg_acct_age": 0,
+      "train_credit_history_length": 0,
+      "test_avg_acct_age": 0,
+      "test_credit_history_length": 0
+    },
+    "bureau_unscored_codes_pct_train": 55.6649,
+    "bureau_unscored_codes_pct_test": 56.0689,
+    "inconsistencies": [
+      {
+        "check_name": "dob_naive_future_year_gt_2018",
+        "n_violations_train": 19866,
+        "pct_of_train": 8.5205,
+        "default_rate_pct_when_violated": 19.2087,
+        "description": "Pandas default 2-digit year parsing shifts '00-'68 incorrectly into 20xx"
+      },
+      {
+        "check_name": "age_corrected_under_18",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "Borrower age at disbursal < 18 years after century fix"
+      },
+      {
+        "check_name": "age_corrected_over_75",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "Borrower age at disbursal > 75 years after century fix"
+      },
+      {
+        "check_name": "disbursed_gt_asset_cost",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "Disbursed loan amount exceeds declared asset cost"
+      },
+      {
+        "check_name": "ltv_gt_100",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "Declared LTV > 100%"
+      },
+      {
+        "check_name": "ltv_diff_gt_5pct_pts",
+        "n_violations_train": 8132,
+        "pct_of_train": 3.4878,
+        "default_rate_pct_when_violated": 21.5322,
+        "description": "|declared ltv - 100*disbursed/asset_cost| > 5 percentage points (likely processing fees/downpayment or LTV calc basis)"
+      },
+      {
+        "check_name": "pri_active_gt_total",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "PRI.ACTIVE.ACCTS exceeds PRI.NO.OF.ACCTS"
+      },
+      {
+        "check_name": "pri_overdue_gt_active",
+        "n_violations_train": 2607,
+        "pct_of_train": 1.1181,
+        "default_rate_pct_when_violated": 27.4645,
+        "description": "PRI.OVERDUE.ACCTS exceeds PRI.ACTIVE.ACCTS (possible closed/written-off overdue accounts)"
+      },
+      {
+        "check_name": "pri_overdue_gt_total",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "PRI.OVERDUE.ACCTS exceeds PRI.NO.OF.ACCTS"
+      },
+      {
+        "check_name": "pri_negative_current_balance",
+        "n_violations_train": 448,
+        "pct_of_train": 0.1921,
+        "default_rate_pct_when_violated": 14.5089,
+        "description": "Negative PRI.CURRENT.BALANCE (overpayment / credit balance / accounting artifact)"
+      },
+      {
+        "check_name": "pri_disbursed_gt_sanctioned",
+        "n_violations_train": 4266,
+        "pct_of_train": 1.8297,
+        "default_rate_pct_when_violated": 16.0806,
+        "description": "PRI.DISBURSED.AMOUNT > PRI.SANCTIONED.AMOUNT"
+      },
+      {
+        "check_name": "pri_balance_gt_sanctioned",
+        "n_violations_train": 7593,
+        "pct_of_train": 3.2566,
+        "default_rate_pct_when_violated": 24.246,
+        "description": "PRI.CURRENT.BALANCE > PRI.SANCTIONED.AMOUNT (accrued interest/penalties or reporting mismatch)"
+      },
+      {
+        "check_name": "pri_zero_accts_nonzero_bal_or_emi",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "PRI.NO.OF.ACCTS == 0 yet PRI balance or primary EMI != 0"
+      },
+      {
+        "check_name": "sec_active_gt_total",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "SEC.ACTIVE.ACCTS exceeds SEC.NO.OF.ACCTS"
+      },
+      {
+        "check_name": "sec_overdue_gt_active",
+        "n_violations_train": 324,
+        "pct_of_train": 0.139,
+        "default_rate_pct_when_violated": 17.5926,
+        "description": "SEC.OVERDUE.ACCTS exceeds SEC.ACTIVE.ACCTS"
+      },
+      {
+        "check_name": "sec_negative_current_balance",
+        "n_violations_train": 61,
+        "pct_of_train": 0.0262,
+        "default_rate_pct_when_violated": 11.4754,
+        "description": "Negative SEC.CURRENT.BALANCE"
+      },
+      {
+        "check_name": "sec_zero_accts_nonzero_bal_or_emi",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "SEC.NO.OF.ACCTS == 0 yet SEC balance or secondary EMI != 0"
+      },
+      {
+        "check_name": "avg_acct_age_gt_credit_history_len",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "AVERAGE.ACCT.AGE exceeds CREDIT.HISTORY.LENGTH"
+      },
+      {
+        "check_name": "delinquent_6m_gt_total_accts",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS > total PRI+SEC accounts"
+      },
+      {
+        "check_name": "new_6m_gt_total_accts",
+        "n_violations_train": 0,
+        "pct_of_train": 0.0,
+        "default_rate_pct_when_violated": null,
+        "description": "NEW.ACCTS.IN.LAST.SIX.MONTHS > total PRI+SEC accounts"
+      },
+      {
+        "check_name": "pri_disbursed_equals_current_loan",
+        "n_violations_train": 3,
+        "pct_of_train": 0.0013,
+        "default_rate_pct_when_violated": 66.6667,
+        "description": "Check if bureau PRI.DISBURSED.AMOUNT ever equals current vehicle loan disbursed_amount"
+      }
+    ],
+    "high_cardinality_drift": [
+      {
+        "column": "branch_id",
+        "train_nunique": 82,
+        "test_nunique": 82,
+        "oot20_unseen_rows_pct": 0.0,
+        "oot20_unseen_ids_pct": 0.0,
+        "kaggle_test_unseen_rows_pct": 0.0,
+        "kaggle_test_unseen_ids_pct": 0.0
+      },
+      {
+        "column": "supplier_id",
+        "train_nunique": 2953,
+        "test_nunique": 2863,
+        "oot20_unseen_rows_pct": 0.7785,
+        "oot20_unseen_ids_pct": 4.0304,
+        "kaggle_test_unseen_rows_pct": 0.6709,
+        "kaggle_test_unseen_ids_pct": 4.7503
+      },
+      {
+        "column": "manufacturer_id",
+        "train_nunique": 11,
+        "test_nunique": 11,
+        "oot20_unseen_rows_pct": 0.0021,
+        "oot20_unseen_ids_pct": 10.0,
+        "kaggle_test_unseen_rows_pct": 0.0009,
+        "kaggle_test_unseen_ids_pct": 9.0909
+      },
+      {
+        "column": "Current_pincode_ID",
+        "train_nunique": 6698,
+        "test_nunique": 6202,
+        "oot20_unseen_rows_pct": 0.875,
+        "oot20_unseen_ids_pct": 5.7537,
+        "kaggle_test_unseen_rows_pct": 0.662,
+        "kaggle_test_unseen_ids_pct": 6.4173
+      },
+      {
+        "column": "State_ID",
+        "train_nunique": 22,
+        "test_nunique": 22,
+        "oot20_unseen_rows_pct": 0.0,
+        "oot20_unseen_ids_pct": 0.0,
+        "kaggle_test_unseen_rows_pct": 0.0,
+        "kaggle_test_unseen_ids_pct": 0.0
+      },
+      {
+        "column": "Employee_code_ID",
+        "train_nunique": 3270,
+        "test_nunique": 3143,
+        "oot20_unseen_rows_pct": 1.0765,
+        "oot20_unseen_ids_pct": 3.4166,
+        "kaggle_test_unseen_rows_pct": 1.2563,
+        "kaggle_test_unseen_ids_pct": 4.0725
+      }
+    ]
+  },
+  "leakage_summary_counts": {
+    "Safe and potentially available at prediction time": 30,
+    "Uncertain availability": 6,
+    "Identifier or administrative columns": 2,
+    "Potential leakage": 1,
+    "Columns requiring removal": 1,
+    "Target variable (Excluded from predictors)": 1
+  },
+  "top_univariate_predictors_by_auc": [
+    {
+      "column": "ltv",
+      "univariate_roc_auc_inv": 0.569386,
+      "univariate_iv": 0.064296,
+      "leakage_classification": "Uncertain availability"
+    },
+    {
+      "column": "disbursed_amount",
+      "univariate_roc_auc_inv": 0.565041,
+      "univariate_iv": 0.057412,
+      "leakage_classification": "Uncertain availability"
+    },
+    {
+      "column": "PERFORM_CNS.SCORE",
+      "univariate_roc_auc_inv": 0.538754,
+      "univariate_iv": 0.045958,
+      "leakage_classification": "Safe and potentially available at prediction time"
+    },
+    {
+      "column": "State_ID",
+      "univariate_roc_auc_inv": 0.533327,
+      "univariate_iv": 0.029446,
+      "leakage_classification": "Safe and potentially available at prediction time"
+    },
+    {
+      "column": "PRI.NO.OF.ACCTS",
+      "univariate_roc_auc_inv": 0.528098,
+      "univariate_iv": 0.01212,
+      "leakage_classification": "Safe and potentially available at prediction time"
+    },
+    {
+      "column": "CREDIT.HISTORY.LENGTH",
+      "univariate_roc_auc_inv": 0.526352,
+      "univariate_iv": 0.011713,
+      "leakage_classification": "Safe and potentially available at prediction time"
+    },
+    {
+      "column": "Date.of.Birth",
+      "univariate_roc_auc_inv": 0.525721,
+      "univariate_iv": 0.008085,
+      "leakage_classification": "Safe and potentially available at prediction time"
+    },
+    {
+      "column": "PRI.SANCTIONED.AMOUNT",
+      "univariate_roc_auc_inv": 0.524101,
+      "univariate_iv": 0.019046,
+      "leakage_classification": "Safe and potentially available at prediction time"
+    },
+    {
+      "column": "UniqueID",
+      "univariate_roc_auc_inv": 0.523731,
+      "univariate_iv": 0.019872,
+      "leakage_classification": "Identifier or administrative columns"
+    },
+    {
+      "column": "DisbursalDate",
+      "univariate_roc_auc_inv": 0.523662,
+      "univariate_iv": 0.019924,
+      "leakage_classification": "Identifier or administrative columns"
+    },
+    {
+      "column": "PRI.DISBURSED.AMOUNT",
+      "univariate_roc_auc_inv": 0.523276,
+      "univariate_iv": 0.018293,
+      "leakage_classification": "Safe and potentially available at prediction time"
+    },
+    {
+      "column": "AVERAGE.ACCT.AGE",
+      "univariate_roc_auc_inv": 0.522874,
+      "univariate_iv": 0.006911,
+      "leakage_classification": "Safe and potentially available at prediction time"
+    }
+  ],
+  "top_correlations_ge_0_50": [
+    {
+      "feature_1": "PRI.SANCTIONED.AMOUNT",
+      "feature_2": "PRI.DISBURSED.AMOUNT",
+      "spearman_corr": 0.9963
+    },
+    {
+      "feature_1": "SEC.SANCTIONED.AMOUNT",
+      "feature_2": "SEC.DISBURSED.AMOUNT",
+      "spearman_corr": 0.9951
+    },
+    {
+      "feature_1": "SEC.ACTIVE.ACCTS",
+      "feature_2": "SEC.SANCTIONED.AMOUNT",
+      "spearman_corr": 0.9892
+    },
+    {
+      "feature_1": "SEC.ACTIVE.ACCTS",
+      "feature_2": "SEC.DISBURSED.AMOUNT",
+      "spearman_corr": 0.9849
+    },
+    {
+      "feature_1": "PRI.CURRENT.BALANCE",
+      "feature_2": "PRI.DISBURSED.AMOUNT",
+      "spearman_corr": 0.9627
+    },
+    {
+      "feature_1": "PRI.CURRENT.BALANCE",
+      "feature_2": "PRI.SANCTIONED.AMOUNT",
+      "spearman_corr": 0.9586
+    },
+    {
+      "feature_1": "PRI.ACTIVE.ACCTS",
+      "feature_2": "PRI.SANCTIONED.AMOUNT",
+      "spearman_corr": 0.9581
+    },
+    {
+      "feature_1": "PRI.ACTIVE.ACCTS",
+      "feature_2": "PRI.DISBURSED.AMOUNT",
+      "spearman_corr": 0.9574
+    },
+    {
+      "feature_1": "PRI.ACTIVE.ACCTS",
+      "feature_2": "PRI.CURRENT.BALANCE",
+      "spearman_corr": 0.926
+    },
+    {
+      "feature_1": "SEC.CURRENT.BALANCE",
+      "feature_2": "SEC.DISBURSED.AMOUNT",
+      "spearman_corr": 0.9097
+    },
+    {
+      "feature_1": "SEC.CURRENT.BALANCE",
+      "feature_2": "SEC.SANCTIONED.AMOUNT",
+      "spearman_corr": 0.9057
+    },
+    {
+      "feature_1": "SEC.ACTIVE.ACCTS",
+      "feature_2": "SEC.CURRENT.BALANCE",
+      "spearman_corr": 0.9043
+    },
+    {
+      "feature_1": "PRI.NO.OF.ACCTS",
+      "feature_2": "PRI.ACTIVE.ACCTS",
+      "spearman_corr": 0.8837
+    },
+    {
+      "feature_1": "Aadhar_flag",
+      "feature_2": "VoterID_flag",
+      "spearman_corr": -0.8693
+    },
+    {
+      "feature_1": "PERFORM_CNS.SCORE",
+      "feature_2": "PRI.NO.OF.ACCTS",
+      "spearman_corr": 0.8598
+    }
+  ]
+}

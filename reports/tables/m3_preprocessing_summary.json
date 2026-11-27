@@ -1,0 +1,85 @@
+{
+  "pipeline_matrix_checks": [
+    {
+      "tier": "F0",
+      "model_family": "linear",
+      "drop_redundant": true,
+      "train_shape": "146000 x 82",
+      "val_shape": "36501 x 82",
+      "n_output_features": 82,
+      "non_finite_count": 0,
+      "fit_transform_sec": 1.55
+    },
+    {
+      "tier": "F0",
+      "model_family": "tree",
+      "drop_redundant": false,
+      "train_shape": "146000 x 84",
+      "val_shape": "36501 x 84",
+      "n_output_features": 84,
+      "non_finite_count": 0,
+      "fit_transform_sec": 1.36
+    },
+    {
+      "tier": "F1",
+      "model_family": "linear",
+      "drop_redundant": true,
+      "train_shape": "146000 x 114",
+      "val_shape": "36501 x 114",
+      "n_output_features": 114,
+      "non_finite_count": 0,
+      "fit_transform_sec": 2.47
+    },
+    {
+      "tier": "F1",
+      "model_family": "tree",
+      "drop_redundant": false,
+      "train_shape": "146000 x 117",
+      "val_shape": "36501 x 117",
+      "n_output_features": 117,
+      "non_finite_count": 0,
+      "fit_transform_sec": 1.96
+    },
+    {
+      "tier": "F2_safe",
+      "model_family": "linear",
+      "drop_redundant": true,
+      "train_shape": "146000 x 120",
+      "val_shape": "36501 x 120",
+      "n_output_features": 120,
+      "non_finite_count": 0,
+      "fit_transform_sec": 3.4
+    },
+    {
+      "tier": "F2_safe",
+      "model_family": "tree",
+      "drop_redundant": false,
+      "train_shape": "146000 x 123",
+      "val_shape": "36501 x 123",
+      "n_output_features": 123,
+      "non_finite_count": 0,
+      "fit_transform_sec": 3.08
+    },
+    {
+      "tier": "F2_plus_emp",
+      "model_family": "linear",
+      "drop_redundant": true,
+      "train_shape": "146000 x 122",
+      "val_shape": "36501 x 122",
+      "n_output_features": 122,
+      "non_finite_count": 0,
+      "fit_transform_sec": 4.12
+    },
+    {
+      "tier": "F2_plus_emp",
+      "model_family": "tree",
+      "drop_redundant": false,
+      "train_shape": "146000 x 125",
+      "val_shape": "36501 x 125",
+      "n_output_features": 125,
+      "non_finite_count": 0,
+      "fit_transform_sec": 3.63
+    }
+  ],
+  "n_engineered_features": 32
+}

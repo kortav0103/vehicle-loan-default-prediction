@@ -1,0 +1,32 @@
+\section{Literature Review}
+\label{sec:literature}
+
+\subsection{Credit Scoring: Classical Models, Gradient Boosting, and Deep Learning}
+Financial and credit-scoring studies consistently identify borrower credit bureau ratings, loan-to-value (LTV) leverage, vehicle attributes, and lending-channel heterogeneity as core determinants of auto loan default~\cite{agarwal2008}. In traditional retail credit benchmarks, Baesens et al.~\cite{baesens2003} showed that well-regularized Logistic Regression (LR) provides a transparent and competitive baseline relative to single decision trees and early neural networks. Updating these benchmarks across diverse credit portfolios, Lessmann et al.~\cite{lessmann2015} demonstrated that tree ensembles---specifically Random Forests~\cite{breiman2001} and Gradient Boosting---outperform standalone linear and tree classifiers with statistical significance, while emphasizing that incremental AUC gains should always be weighed against interpretability and operational cost.
+
+On structured tabular datasets, Gradient Boosted Decision Tree (GBDT) frameworks lead modern practice, notably \textbf{XGBoost}~\cite{chen2016} (regularized second-order boosting with sparsity-aware branching for missing values and dense zeros) and \textbf{LightGBM}~\cite{ke2017} (fast histogram-based leaf-wise tree growth). Whether deep neural networks surpass GBDTs on consumer credit tables remains widely studied. Both Gunnarsson et al.~\cite{gunnarsson2021} and Grinsztajn et al.~\cite{grinsztajn2022} concluded across large empirical benchmarks that GBDTs match or outperform Multilayer Perceptrons (MLPs) and tabular deep networks at much lower tuning cost, because axis-aligned tree splits naturally model sharp thresholds and resist uninformative features. Notably, a recent paper on the LTFS dataset by Wu~\cite{wu2025} reported an unusually large jump from LR ($\text{AUC}=0.62$) to XGBoost with SMOTE ($\text{AUC}=0.89$), yet relied on random train-test splitting without temporal validation, calibration auditing, or fold-isolated resampling controls.
+
+\subsection{Class Imbalance, Calibration, and Cost-Sensitive Decisions}
+While oversampling methods such as SMOTE~\cite{chawla2002} are frequently applied by default to imbalanced data, empirical risk-modeling evidence cautions against uncritical resampling. van den Goorbergh et al.~\cite{goorbergh2022} proved that random undersampling and SMOTE do not improve ROC-AUC separation on moderately imbalanced risk data while severely distorting predicted probabilities (ruining calibration). Furthermore, Saito and Rehmsmeier~\cite{saito2015} demonstrated that Precision--Recall curves (PR-AUC) are more informative than ROC curves alone under class imbalance. Decision theory establishes that when a model predicts well-calibrated risk scores on the natural class prior, asymmetric financial trade-offs should be handled through the Bayes-optimal threshold $c_{\text{FP}}/(c_{\text{FP}}+c_{\text{FN}})$~\cite{elkan2001} or principal-weighted loan cost metrics~\cite{bahnsen2014} rather than synthetic data generation.
+
+\subsection{Explainable AI in Credit Risk}
+Because consumer lending requires transparent adverse-action explanations, model interpretability is essential alongside predictive accuracy. Building on the game-theoretic SHAP framework~\cite{lundberg2017}, Lundberg et al.~\cite{lundberg2020} introduced \textbf{TreeSHAP} to compute exact Shapley feature attributions and pairwise interactions for tree ensembles, resolving the inconsistency of traditional split-gain counts while cautioning that strongly correlated predictors share credit across tree splits. Extending SHAP to credit governance, Bussmann et al.~\cite{bussmann2021} showed how Shapley auditing and subgroup analysis uncover distinct borrower risk profiles and highlight fairness risks.
+
+Table~\ref{tab:lit_summary} summarizes the main literature themes and how they directly inform our project pipeline.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Summary of key literature themes and direct implications for our LTFS pipeline.}
+  \label{tab:lit_summary}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{@{}L{3.4cm} L{2.8cm} Y Y@{}}
+    \toprule
+    \textbf{Theme} & \textbf{Key References} & \textbf{Established Findings} & \textbf{Design Decision Here} \\
+    \midrule
+    Auto loans \& tabular model choice & \cite{agarwal2008,baesens2003,lessmann2015,gunnarsson2021,grinsztajn2022} & Credit score, LTV, and dealer channels drive risk; GBDTs outperform LR and tabular MLPs with lower compute. & Benchmark LR, DT, RF, XGBoost, LightGBM, and MLP under clean features and OOT testing. \\[3pt]
+    GBDT categoricals \& LTFS gaps & \cite{chen2016,ke2017,wu2025,miccibarreca2001} & Zero-inflated tables suit GBDTs; naive target encoding or random splits cause optimism bias. & Use Out-of-Time validation and strict Out-of-Fold Empirical-Bayes target encoding on high-cardinality IDs. \\[3pt]
+    Imbalance, calibration \& cost scoring & \cite{chawla2002,goorbergh2022,saito2015,elkan2001,bahnsen2014} & Resampling skews probability calibration without lifting AUC; PR-AUC and cost-based cutoffs reflect risk better. & Compare fold-isolated SMOTE, RUS, and class weights vs.\ natural prior with Bayesian and principal-weighted thresholds. \\[3pt]
+    Credit explainability & \cite{lundberg2017,lundberg2020,bussmann2021} & TreeSHAP gives exact local/global explanations; collinear features share attribution. & Apply exact TreeSHAP with Dev-to-OOT stability checks, error cases, and thin-file audits. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}

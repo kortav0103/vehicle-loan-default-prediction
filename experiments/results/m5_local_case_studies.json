@@ -1,0 +1,310 @@
+[
+  {
+    "case_type": "TP",
+    "dev_row_index": 114026,
+    "actual_y": 1,
+    "pred_prob": 0.499453,
+    "log_odds_margin": -0.002187,
+    "base_value_log_odds": -1.478042,
+    "base_prob": 0.185723,
+    "raw_attributes": {
+      "disbursed_amount": 79686.0,
+      "asset_cost": 117770.0,
+      "ltv": 69.63,
+      "PERFORM_CNS.SCORE": 551.0,
+      "Employment.Type": "Self employed",
+      "PRI.NO.OF.ACCTS": 1.0,
+      "PRI.ACTIVE.ACCTS": 1.0,
+      "PRI.OVERDUE.ACCTS": 0.0,
+      "DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS": 1.0,
+      "NO.OF_INQUIRIES": 0.0,
+      "State_ID": 3.0,
+      "branch_id": 10.0,
+      "supplier_id": 18471.0,
+      "Current_pincode_ID": 5706.0
+    },
+    "top_drivers": [
+      {
+        "feature": "supplier_id__oof_te",
+        "feature_value": 0.3586,
+        "shap_value": 0.36624
+      },
+      {
+        "feature": "Current_pincode_ID__oof_te",
+        "feature_value": 0.2859,
+        "shap_value": 0.210314
+      },
+      {
+        "feature": "disbursed_amount",
+        "feature_value": 79686.0,
+        "shap_value": 0.201284
+      },
+      {
+        "feature": "bureau_score_clean",
+        "feature_value": 551.0,
+        "shap_value": 0.15659
+      },
+      {
+        "feature": "ltv",
+        "feature_value": 69.63,
+        "shap_value": -0.110075
+      },
+      {
+        "feature": "delinquent_6m_to_total_ratio",
+        "feature_value": 1.0,
+        "shap_value": 0.100056
+      },
+      {
+        "feature": "Employment.Type_Self employed",
+        "feature_value": 1.0,
+        "shap_value": 0.082088
+      },
+      {
+        "feature": "branch_id__oof_te",
+        "feature_value": 0.2767,
+        "shap_value": 0.069503
+      },
+      {
+        "feature": "bureau_risk_ordinal",
+        "feature_value": 10.0,
+        "shap_value": 0.067608
+      },
+      {
+        "feature": "age_at_disbursal",
+        "feature_value": 25.8042,
+        "shap_value": 0.063887
+      }
+    ]
+  },
+  {
+    "case_type": "TN",
+    "dev_row_index": 63065,
+    "actual_y": 0,
+    "pred_prob": 0.075,
+    "log_odds_margin": -2.512312,
+    "base_value_log_odds": -1.478042,
+    "base_prob": 0.185723,
+    "raw_attributes": {
+      "disbursed_amount": 39394.0,
+      "asset_cost": 64625.0,
+      "ltv": 63.44,
+      "PERFORM_CNS.SCORE": 738.0,
+      "Employment.Type": "Self employed",
+      "PRI.NO.OF.ACCTS": 1.0,
+      "PRI.ACTIVE.ACCTS": 1.0,
+      "PRI.OVERDUE.ACCTS": 0.0,
+      "DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS": 0.0,
+      "NO.OF_INQUIRIES": 0.0,
+      "State_ID": 5.0,
+      "branch_id": 48.0,
+      "supplier_id": 15905.0,
+      "Current_pincode_ID": 6342.0
+    },
+    "top_drivers": [
+      {
+        "feature": "ltv",
+        "feature_value": 63.44,
+        "shap_value": -0.209822
+      },
+      {
+        "feature": "supplier_id__oof_te",
+        "feature_value": 0.1487,
+        "shap_value": -0.180887
+      },
+      {
+        "feature": "NEW.ACCTS.IN.LAST.SIX.MONTHS",
+        "feature_value": 1.0,
+        "shap_value": -0.118876
+      },
+      {
+        "feature": "Current_pincode_ID__oof_te",
+        "feature_value": 0.1768,
+        "shap_value": -0.114736
+      },
+      {
+        "feature": "bureau_score_clean",
+        "feature_value": 738.0,
+        "shap_value": -0.101513
+      },
+      {
+        "feature": "disbursed_amount",
+        "feature_value": 39394.0,
+        "shap_value": -0.09101
+      },
+      {
+        "feature": "Employment.Type_Self employed",
+        "feature_value": 1.0,
+        "shap_value": 0.074329
+      },
+      {
+        "feature": "age_at_disbursal",
+        "feature_value": 26.2669,
+        "shap_value": 0.074215
+      },
+      {
+        "feature": "ltv_computed",
+        "feature_value": 60.9578,
+        "shap_value": -0.063967
+      },
+      {
+        "feature": "credit_utilization_ratio",
+        "feature_value": 0.3328,
+        "shap_value": -0.057911
+      }
+    ]
+  },
+  {
+    "case_type": "FN",
+    "dev_row_index": 39917,
+    "actual_y": 1,
+    "pred_prob": 0.110026,
+    "log_odds_margin": -2.090477,
+    "base_value_log_odds": -1.478042,
+    "base_prob": 0.185723,
+    "raw_attributes": {
+      "disbursed_amount": 41269.0,
+      "asset_cost": 60725.0,
+      "ltv": 74.1,
+      "PERFORM_CNS.SCORE": 0.0,
+      "Employment.Type": "Salaried",
+      "PRI.NO.OF.ACCTS": 0.0,
+      "PRI.ACTIVE.ACCTS": 0.0,
+      "PRI.OVERDUE.ACCTS": 0.0,
+      "DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS": 0.0,
+      "NO.OF_INQUIRIES": 0.0,
+      "State_ID": 15.0,
+      "branch_id": 3.0,
+      "supplier_id": 16277.0,
+      "Current_pincode_ID": 576.0
+    },
+    "top_drivers": [
+      {
+        "feature": "supplier_id__oof_te",
+        "feature_value": 0.1306,
+        "shap_value": -0.326241
+      },
+      {
+        "feature": "age_at_disbursal",
+        "feature_value": 21.5058,
+        "shap_value": 0.179598
+      },
+      {
+        "feature": "disbursed_amount",
+        "feature_value": 41269.0,
+        "shap_value": -0.100661
+      },
+      {
+        "feature": "Current_pincode_ID__oof_te",
+        "feature_value": 0.1751,
+        "shap_value": -0.098076
+      },
+      {
+        "feature": "ltv",
+        "feature_value": 74.1,
+        "shap_value": -0.078895
+      },
+      {
+        "feature": "Employment.Type_Self employed",
+        "feature_value": 0.0,
+        "shap_value": -0.070294
+      },
+      {
+        "feature": "age_at_first_credit_years",
+        "feature_value": 21.5058,
+        "shap_value": 0.069839
+      },
+      {
+        "feature": "branch_id__oof_te",
+        "feature_value": 0.1656,
+        "shap_value": -0.066902
+      },
+      {
+        "feature": "manufacturer_id_86",
+        "feature_value": 0.0,
+        "shap_value": 0.051411
+      },
+      {
+        "feature": "kyc_doc_count",
+        "feature_value": 2.0,
+        "shap_value": -0.033369
+      }
+    ]
+  },
+  {
+    "case_type": "FP",
+    "dev_row_index": 168292,
+    "actual_y": 0,
+    "pred_prob": 0.420025,
+    "log_odds_margin": -0.322671,
+    "base_value_log_odds": -1.478042,
+    "base_prob": 0.185723,
+    "raw_attributes": {
+      "disbursed_amount": 62463.0,
+      "asset_cost": 78706.0,
+      "ltv": 81.32,
+      "PERFORM_CNS.SCORE": 825.0,
+      "Employment.Type": "Self employed",
+      "PRI.NO.OF.ACCTS": 11.0,
+      "PRI.ACTIVE.ACCTS": 3.0,
+      "PRI.OVERDUE.ACCTS": 0.0,
+      "DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS": 1.0,
+      "NO.OF_INQUIRIES": 2.0,
+      "State_ID": 4.0,
+      "branch_id": 74.0,
+      "supplier_id": 17113.0,
+      "Current_pincode_ID": 2600.0
+    },
+    "top_drivers": [
+      {
+        "feature": "branch_id__oof_te",
+        "feature_value": 0.2472,
+        "shap_value": 0.177848
+      },
+      {
+        "feature": "inquiry_to_accts_ratio",
+        "feature_value": 0.1667,
+        "shap_value": 0.168177
+      },
+      {
+        "feature": "NO.OF_INQUIRIES",
+        "feature_value": 2.0,
+        "shap_value": 0.158705
+      },
+      {
+        "feature": "delinquent_6m_to_total_ratio",
+        "feature_value": 0.5,
+        "shap_value": 0.131711
+      },
+      {
+        "feature": "PRIMARY.INSTAL.AMT",
+        "feature_value": 28549.0,
+        "shap_value": 0.119041
+      },
+      {
+        "feature": "supplier_id__oof_te",
+        "feature_value": 0.229,
+        "shap_value": 0.101375
+      },
+      {
+        "feature": "total_instal_amt",
+        "feature_value": 28549.0,
+        "shap_value": 0.089747
+      },
+      {
+        "feature": "disbursed_amount",
+        "feature_value": 62463.0,
+        "shap_value": 0.07592
+      },
+      {
+        "feature": "instalment_to_disbursed_ratio",
+        "feature_value": 0.457,
+        "shap_value": 0.073733
+      },
+      {
+        "feature": "DELINQUENT.ACCTS.IN.LAST.SIX.MONTHS",
+        "feature_value": 1.0,
+        "shap_value": 0.065468
+      }
+    ]
+  }
+]

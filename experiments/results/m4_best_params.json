@@ -1,0 +1,42 @@
+{
+  "feature_tier": "F2_safe",
+  "models": {
+    "logistic_regression": {
+      "C": 0.1,
+      "max_iter": 1000,
+      "solver": "lbfgs"
+    },
+    "random_forest": {
+      "n_estimators": 120,
+      "max_depth": 18,
+      "min_samples_leaf": 65,
+      "max_features": "sqrt"
+    },
+    "lightgbm": {
+      "num_leaves": 32,
+      "max_depth": 7,
+      "min_child_samples": 57,
+      "learning_rate": 0.01910601196047358,
+      "subsample": 0.6830499496261544,
+      "colsample_bytree": 0.6270650870496871,
+      "reg_alpha": 1.4719802792574428,
+      "reg_lambda": 0.12686423196280094,
+      "n_estimators": 737,
+      "subsample_freq": 1,
+      "verbose": -1
+    },
+    "xgboost": {
+      "max_depth": 4,
+      "min_child_weight": 50.36369740865463,
+      "learning_rate": 0.01805104716719767,
+      "subsample": 0.6677286986966442,
+      "colsample_bytree": 0.6766722633567279,
+      "reg_alpha": 0.007622451617808056,
+      "reg_lambda": 0.07327272690450597,
+      "gamma": 0.3284954599667885,
+      "n_estimators": 1195,
+      "tree_method": "hist",
+      "eval_metric": "logloss"
+    }
+  }
+}

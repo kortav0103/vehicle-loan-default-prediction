@@ -1,0 +1,5 @@
+model,split_protocol,n_train,n_val,val_default_rate,cv_roc_auc_mean,temporal_block3_roc_auc,auc_drop_cv_to_temp,temporal_block3_pr_auc,temporal_block3_ks,temporal_block3_brier,temporal_block3_ece,temporal_block3_cost_5to1_bayes,fit_sec
+logistic_regression_s1,dev_temporal_block_0..2_to_3,146000,36501,0.212076,0.66529,0.65357,0.01172,0.325918,0.22506,0.159246,0.018418,0.691132,2.49
+random_forest_base,dev_temporal_block_0..2_to_3,146000,36501,0.212076,0.668803,0.654154,0.014649,0.326585,0.226929,0.159275,0.018448,0.686557,14.11
+xgboost_stage2,dev_temporal_block_0..2_to_3,146000,36501,0.212076,0.674904,0.661896,0.013008,0.335964,0.241715,0.158285,0.021338,0.683954,11.0
+lightgbm_stage2,dev_temporal_block_0..2_to_3,146000,36501,0.212076,0.674808,0.661975,0.012833,0.336223,0.241466,0.158277,0.021473,0.682146,9.77

@@ -1,0 +1,117 @@
+{
+  "overall_status": "PASS",
+  "checks": [
+    {
+      "check": "raw_files_immutable_sha256_and_size",
+      "passed": true,
+      "details": {
+        "checked_files": 3,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "csv_dimensions_match_audit_summary",
+      "passed": true,
+      "details": {
+        "raw_train": {
+          "rows": 233154,
+          "cols": 41
+        },
+        "summary_train": {
+          "rows": 233154,
+          "cols": 41
+        },
+        "raw_test": {
+          "rows": 112392,
+          "cols": 40
+        },
+        "summary_test": {
+          "rows": 112392,
+          "cols": 40
+        }
+      }
+    },
+    {
+      "check": "target_counts_exact_match",
+      "passed": true,
+      "details": {
+        "raw_target_counts": {
+          "0": 182543,
+          "1": 50611
+        }
+      }
+    },
+    {
+      "check": "audit_tables_cover_100pct_columns",
+      "passed": true,
+      "details": {
+        "m1_column_profile.csv": {
+          "row_count": 41,
+          "missing_from_table": [],
+          "extra_in_table": [],
+          "exact_match": true
+        },
+        "m1_leakage_audit.csv": {
+          "row_count": 41,
+          "missing_from_table": [],
+          "extra_in_table": [],
+          "exact_match": true
+        },
+        "m1_feature_classification.csv": {
+          "row_count": 41,
+          "missing_from_table": [],
+          "extra_in_table": [],
+          "exact_match": true
+        }
+      }
+    },
+    {
+      "check": "diagnostic_figures_valid_png",
+      "passed": true,
+      "details": [
+        {
+          "file": "m1_target_distribution.png",
+          "exists": true,
+          "size_bytes": 296477,
+          "valid_png_magic": true,
+          "ok": true
+        },
+        {
+          "file": "m1_missing_values.png",
+          "exists": true,
+          "size_bytes": 179678,
+          "valid_png_magic": true,
+          "ok": true
+        },
+        {
+          "file": "m1_bureau_score_audit.png",
+          "exists": true,
+          "size_bytes": 254075,
+          "valid_png_magic": true,
+          "ok": true
+        },
+        {
+          "file": "m1_numeric_distributions_outliers.png",
+          "exists": true,
+          "size_bytes": 305259,
+          "valid_png_magic": true,
+          "ok": true
+        },
+        {
+          "file": "m1_high_cardinality_drift.png",
+          "exists": true,
+          "size_bytes": 235077,
+          "valid_png_magic": true,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "check": "no_trained_models_created",
+      "passed": true,
+      "details": {
+        "forbidden_model_files_found": []
+      }
+    }
+  ]
+}
